@@ -1,0 +1,22 @@
+{
+    "anchor_start_points": [
+        [
+            9.7,
+            19.1,
+            0
+        ]
+    ],
+    "anchor_end_points": [
+        [
+            16.4,
+            19.1,
+            0
+        ]
+
+    ],
+    "maximum_anchor_stress": [500e26],
+    "initial_anchor_stress": [1e9],
+    "residual_anchor_stress": [250e6],
+    "anchor_radius": [0.2],
+    "anchor_stiffness": [100e10]
+}
