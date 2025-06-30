@@ -3,8 +3,10 @@
     <meshes>
         <mesh> ./mesh/geo_domain_2D_q8.vtu </mesh>
         <mesh> ./mesh/geometry_right.vtu </mesh>
-        <mesh> ./mesh/geometry_top.vtu </mesh>
-        <mesh> ./mesh/geometry_bottom.vtu</mesh>
+        <mesh> ./mesh/geometry_topleft.vtu </mesh>
+        <mesh> ./mesh/geometry_bottomleft.vtu</mesh>
+        <mesh> ./mesh/geometry_topright.vtu </mesh>
+        <mesh> ./mesh/geometry_bottomright.vtu</mesh>
         <mesh> ./mesh/geometry_left.vtu</mesh>
     </meshes>
     <processes>
@@ -222,7 +224,7 @@
         <curve>
             <name>pressure_cycle</name>
             <coords>0.0 1000</coords>
-            <values>7e6 2e8</values>
+            <values>7e6 1e8</values>
         </curve>
     </curves>
     <process_variables>
@@ -234,13 +236,25 @@
             <compensate_non_equilibrium_initial_residuum>false</compensate_non_equilibrium_initial_residuum>
             <boundary_conditions>
                 <boundary_condition>
-                    <mesh>geometry_bottom</mesh>
+                    <mesh>geometry_bottomright</mesh>
                     <type>Dirichlet</type>
                     <component>1</component>
                     <parameter>Zero</parameter>
                 </boundary_condition>
                 <boundary_condition>
-                    <mesh>geometry_top</mesh>
+                    <mesh>geometry_bottomleft</mesh>
+                    <type>Neumann</type>
+                    <component>1</component>
+                    <parameter>Zero</parameter>
+                </boundary_condition>
+                <boundary_condition>
+                    <mesh>geometry_topleft</mesh>
+                    <type>Neumann</type>
+                    <component>1</component>
+                    <parameter>traction_top</parameter>
+                </boundary_condition>
+                <boundary_condition>
+                    <mesh>geometry_topright</mesh>
                     <type>Neumann</type>
                     <component>1</component>
                     <parameter>traction_top</parameter>
