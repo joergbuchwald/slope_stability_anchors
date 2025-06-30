@@ -81,7 +81,7 @@ Background Field = 1;
 
 // Set up the mesh options (optional, for finer control)
 Mesh.Algorithm = 4; // Frontal-Delaunay for 2D
-Mesh.CharacteristicLengthMin = 0.03;
+Mesh.CharacteristicLengthMin = 0.3;
 Mesh.CharacteristicLengthMax = 0.9;
 //+
 Physical Surface("HostRock", 100) = {1, 2, 4, 5};
