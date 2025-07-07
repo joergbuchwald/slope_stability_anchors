@@ -74,7 +74,7 @@
         </processes>
         <output>
             <type>VTK</type>
-            <prefix>fault_slip_WP_ref</prefix>
+            <prefix>fault_slip_WP_ref_d01_dr8</prefix>
             <timesteps>
                 <pair>
                     <repeat>1</repeat>
@@ -280,8 +280,8 @@
             <name>nonlinear_solver</name>
             <type>Newton</type>
             <max_iter>20</max_iter>
-            <damping>0.8</damping>
-            <damping_reduction>3</damping_reduction>
+            <damping>0.1</damping>
+            <damping_reduction>8</damping_reduction>
             <linear_solver>general_linear_solver</linear_solver>
         </nonlinear_solver>
     </nonlinear_solvers>

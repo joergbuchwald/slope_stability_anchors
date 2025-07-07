@@ -28,9 +28,9 @@
                     <material_property name="PlaneCohesion" parameter="PlaneCohesion" />
                     <material_property name="PlaneFrictionAngle" parameter="PlaneFrictionAngle" />
                     <material_property name="PlaneDilatancyAngle" parameter="PlaneDilatancyAngle" />
-                    <!-- <material_property name="Normals[0]" parameter="normals[0]" />
+                    <material_property name="Normals[0]" parameter="normals[0]" />
                     <material_property name="Normals[1]" parameter="normals[1]" />
-                    <material_property name="Normals[2]" parameter="normals[2]" /> -->
+                    <material_property name="Normals[2]" parameter="normals[2]" />
                 </material_properties>
             </constitutive_relation>
             <process_variables>
@@ -118,12 +118,12 @@
             </phases>
         </medium>
     </media>
-    <local_coordinate_system>
+    <!--local_coordinate_system>
         <basis_vector_0>e0</basis_vector_0>
         <basis_vector_1>e1</basis_vector_1>
-    </local_coordinate_system>
+    </local_coordinate_system-->
     <parameters>
-        <parameter>
+        <!--parameter>
             <name>e1</name>
             <type>Constant</type>
             <values>-0.42261826174069944 -0.9063077870366499</values>
@@ -132,7 +132,7 @@
             <name>e0</name>
             <type>Constant</type>
             <values>-0.9063077870366499 0.42261826174069944</values>
-        </parameter>
+        </parameter-->
         <parameter>
             <name>E0</name>
             <type>Constant</type>
@@ -168,7 +168,7 @@
             <type>Constant</type>
             <value>10.</value>
         </parameter>
-                <!-- <parameter>
+        <parameter>
             <name>normals[0]</name>
             <type>Constant</type>
             <value>-0.9063077870366499</value>
@@ -182,7 +182,7 @@
             <name>normals[2]</name>
             <type>Constant</type>
             <value>0.</value>
-        </parameter> -->
+        </parameter>
         <parameter>
             <name>displacement0</name>
             <type>Constant</type>
@@ -279,8 +279,8 @@
             <name>nonlinear_solver</name>
             <type>Newton</type>
             <max_iter>20</max_iter>
-            <damping>0.8</damping>
-            <damping_reduction>3</damping_reduction>
+            <damping>0.1</damping>
+            <damping_reduction>8</damping_reduction>
             <linear_solver>general_linear_solver</linear_solver>
         </nonlinear_solver>
     </nonlinear_solvers>
