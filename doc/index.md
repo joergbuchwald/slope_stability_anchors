@@ -118,6 +118,7 @@ The actual Anchors are the activated by the corresponding source term type:
 </source_terms>
 ```
 
-The following plot shows the difference in the displacement of the left and the right side without anchors, with relaxed and prestressed anchors.
+The parameter defined by external anchor head load allows to provide an additional load on the anchor head.
+The following plot shows the difference in the displacement of the left (11,15,0) and the right (13,15,0) side without anchors, with relaxed and prestressed anchors.
 
 ![Displacement Graph](output_19_0.png)
