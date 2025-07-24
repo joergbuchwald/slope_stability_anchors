@@ -3,11 +3,10 @@
     <meshes>
         <mesh> ./mesh/geo_domain_2D_q8.vtu </mesh>
         <mesh> ./mesh/geometry_right.vtu </mesh>
-        <mesh> ./mesh/geometry_topleft.vtu </mesh>
-        <mesh> ./mesh/geometry_bottomleft.vtu</mesh>
-        <mesh> ./mesh/geometry_topright.vtu </mesh>
-        <mesh> ./mesh/geometry_bottomright.vtu</mesh>
+        <mesh> ./mesh/geometry_top.vtu </mesh>
+        <mesh> ./mesh/geometry_bottom.vtu</mesh>
         <mesh> ./mesh/geometry_left.vtu</mesh>
+        <mesh> ./mesh/four_anchors_nails.vtu </mesh>
     </meshes>
     <processes>
         <process>
@@ -72,7 +71,9 @@
         </processes>
         <output>
             <type>VTK</type>
-            <prefix>fault_slip_ref</prefix>
+            <!--prefix>fault_slip_ref</prefix-->
+            <prefix>fault_slip_nailanchors_prestress</prefix>
+            <!--prefix>fault_slip_anchors</prefix-->
             <timesteps>
                 <pair>
                     <repeat>1</repeat>
@@ -132,6 +133,36 @@
             <type>Constant</type>
             <values>-0.9063077870366499 0.42261826174069944</values>
         </parameter>
+        <!--parameter>
+            <name>e0</name>
+            <type>Constant</type>
+            <values>1 0</values>
+        </parameter>
+        <parameter>
+            <name>e1</name>
+            <type>Constant</type>
+            <values>0 1</values>
+        </parameter>
+        <parameter>
+            <name>YoungModulus0</name>
+            <type>Constant</type>
+            <value>6.1065e9</value>
+        </parameter>
+        <parameter>
+            <name>YoungModulus1</name>
+            <type>Constant</type>
+            <value>0.2816e9</value>
+        </parameter>
+        <parameter>
+            <name>PoissonRatio0</name>
+            <type>Constant</type>
+            <value>.3275</value>
+        </parameter>
+        <parameter>
+            <name>PoissonRatio1</name>
+            <type>Constant</type>
+            <value>-0.5</value>
+        </parameter-->
         <parameter>
             <name>YoungModulus</name>
             <type>Group</type>
@@ -194,6 +225,41 @@
                 <value>850e10</value>
             </index_values>
         </parameter>
+        <!--parameter>
+            <name>PlaneCohesion</name>
+            <type>Constant</type>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>PlaneFrictionAngle</name>
+            <type>Constant</type>
+            <value>22.</value>
+        </parameter>
+        <parameter>
+            <name>PlaneDilatancyAngle</name>
+            <type>Constant</type>
+            <value>0.</value>
+        </parameter>
+        <parameter>
+            <name>normals[0]</name>
+            <type>Constant</type>
+            <value>-0.9063077870366499</value>
+        </parameter>
+        <parameter>
+            <name>normals[1]</name>
+            <type>Constant</type>
+            <value>0.4226182617406995</value>
+        </parameter>
+        <parameter>
+            <name>normals[2]</name>
+            <type>Constant</type>
+            <value>0.</value>
+        </parameter>
+        <parameter>
+            <name>Visc</name>
+            <type>Constant</type>
+            <value>1e-12</value>
+        </parameter-->
         <parameter>
             <name>FrictionAngle</name>
             <type>Constant</type>
@@ -223,6 +289,7 @@
             <name>scaling_pressure</name>
             <type>Function</type>
             <expression>-1.0</expression>
+            <!--expression>if(x &lt; 15.0,-1,0)</expression-->
         </parameter>
         <parameter>
             <name>Zero</name>
@@ -236,6 +303,8 @@
         </parameter>
         <parameter>
             <name>traction_top</name>
+            <!--type>Constant</type>
+            <value>-7e6</value-->
             <type>CurveScaled</type>
             <curve>pressure_cycle</curve>
             <parameter>scaling_pressure</parameter>
@@ -244,6 +313,9 @@
             <name>traction_left</name>
             <type>Constant</type>
             <value>6.0e6</value>
+            <!--type>CurveScaled</type>
+            <curve>pressure_cycle</curve>
+            <parameter>scaling_pressure</parameter-->
         </parameter>
         <parameter>
             <name>Initial_stress</name>
@@ -255,7 +327,7 @@
         <curve>
             <name>pressure_cycle</name>
             <coords>0.0 1000</coords>
-            <values>7e6 1e8</values>
+            <values>7e6 2e8</values>
         </curve>
     </curves>
     <process_variables>
@@ -267,29 +339,29 @@
             <compensate_non_equilibrium_initial_residuum>false</compensate_non_equilibrium_initial_residuum>
             <boundary_conditions>
                 <boundary_condition>
-                    <mesh>geometry_bottomright</mesh>
+                    <mesh>geometry_bottom</mesh>
                     <type>Dirichlet</type>
                     <component>1</component>
                     <parameter>Zero</parameter>
                 </boundary_condition>
-                <boundary_condition>
-                    <mesh>geometry_bottomleft</mesh>
-                    <type>Neumann</type>
-                    <component>1</component>
+                <!--boundary_condition>
+                    <mesh>geometry_bottom</mesh>
+                    <type>Dirichlet</type>
+                    <component>0</component>
                     <parameter>Zero</parameter>
-                </boundary_condition>
+                </boundary_condition-->
                 <boundary_condition>
-                    <mesh>geometry_topleft</mesh>
+                    <mesh>geometry_top</mesh>
                     <type>Neumann</type>
                     <component>1</component>
                     <parameter>traction_top</parameter>
                 </boundary_condition>
-                <boundary_condition>
-                    <mesh>geometry_topright</mesh>
-                    <type>Neumann</type>
-                    <component>1</component>
-                    <parameter>traction_top</parameter>
-                </boundary_condition>
+                <!--boundary_condition>
+                    <mesh>geometry_top</mesh>
+                    <type>Dirichlet</type>
+                    <component>0</component>
+                    <parameter>Zero</parameter>
+                </boundary_condition-->
                 <boundary_condition>
                     <mesh>geometry_right</mesh>
                     <type>Dirichlet</type>
@@ -303,21 +375,23 @@
                     <parameter>traction_left</parameter>
                 </boundary_condition>
             </boundary_conditions>
+            <source_terms>
+                <source_term>
+                    <mesh>four_anchors_nails</mesh>
+                    <type>EmbeddedAnchor</type>
+                    <component>0</component>
+                    <external_anchor_head_load>force0</external_anchor_head_load>
+                </source_term>
+            </source_terms>
         </process_variable>
     </process_variables>
     <nonlinear_solvers>
         <nonlinear_solver>
             <name>nonlinear_solver</name>
-            <trdc>false</trdc>
-            <use_cauchy>false</use_cauchy>
-            <use_dogleg>false</use_dogleg>
-            <trdc_start_it>0</trdc_start_it>
-            <trdc_stop_it>500</trdc_stop_it>
-            <delta_0>1</delta_0>
             <type>Newton</type>
             <max_iter>20</max_iter>
-            <!--damping>0.8</damping>
-            <damping_reduction>3</damping_reduction-->
+            <damping>0.8</damping>
+            <damping_reduction>3</damping_reduction>
             <linear_solver>general_linear_solver</linear_solver>
         </nonlinear_solver>
     </nonlinear_solvers>
@@ -328,6 +402,22 @@
                 <solver_type>PardisoLU</solver_type>
                 <scaling>1</scaling>
             </eigen>
+            <petsc>
+                <prefix>hc</prefix>
+                <parameters>
+                    -hc_mat_type aij
+                    -hc_ksp_type gmres
+                    -hc_pc_type lu
+                    -hc_pc_factor_mat_solver_type mumps
+                    <!-- -hc_mat_mumps_cntl_1 0.02 -->
+                    <!-- -hc_mat_mumps_icntl_7 7 -->
+                    <!-- -hc_mat_mumps_icntl_8 2 -->
+                    <!-- -hc_mat_mumps_icntl_13 7 -->
+                    <!-- -hc_mat_mumps_icntl_14 40 -->
+                    <!-- -hc_mat_mumps_icntl_24 2 -->
+                    <!-- -hc_mat_mumps_icntl_28 20 -->
+                </parameters>
+            </petsc>
         </linear_solver>
     </linear_solvers>
 </OpenGeoSysProject>
