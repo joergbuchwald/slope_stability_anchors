@@ -1,0 +1,25 @@
+{
+    "anchor_start_points": [
+        [
+            1,
+            4.5,
+            0
+        ]
+
+    ],
+    "anchor_end_points": [
+        [
+            10.4,
+            4.5,
+            0
+        ]
+
+
+    ],
+    "maximum_anchor_stress": [500e26],
+    "initial_anchor_stress": [5e7],
+    "residual_anchor_stress": [250e6],
+    "anchor_cross_sectional_area": [0.12566370614359174],
+    "anchor_stiffness": [100e9],
+    "free_fraction": [0.0]
+}
